@@ -1,10 +1,10 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Camera.gd" type="Script" id=1]
 [ext_resource path="res://Assets/tilemap_packed.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player_Container.gd" type="Script" id=3]
-[ext_resource path="res://Assets/character_squareYellow.png" type="Texture" id=4]
-[ext_resource path="res://Enemies/Enemy1.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/Enemies.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/Enemy2.tscn" type="PackedScene" id=5]
 
 [sub_resource type="NavigationPolygon" id=29]
 vertices = PoolVector2Array( 477, 320, 191, 288, 223, 272, 477, 208, 4, 320, 66, 304, 255, 240, 431, 208, 304, 207, 287, 208, 209, 272, 273, 208, 255, 224, 191, 272, 209, 256, 241, 240, 223, 256, 287, 192, 304, 192, 3, -12, 476, -12, 476, 176, 431, 192, 480, 176, 480, 208, 272, 192, 65, 272, 65, 288, 49, 288, 66, 292, 82, 292, 241, 224, 83, 272, 97, 272, 49, 304, 97, 287 )
@@ -477,9 +477,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 13/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 7, 9 )
-
 [node name="Game" type="Node2D"]
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
@@ -504,22 +501,14 @@ tile_data = PoolIntArray( -65536, 8, 0, -65535, 9, 0, -65534, 9, 0, -65533, 9, 0
 script = ExtResource( 3 )
 
 [node name="Enemies" type="Node2D" parent="."]
+script = ExtResource( 4 )
 
-[node name="Enemy1" type="KinematicBody2D" parent="Enemies"]
-script = ExtResource( 5 )
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
 
-[node name="Sprite" type="Sprite" parent="Enemies/Enemy1"]
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 4 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Enemy1"]
-scale = Vector2( 0.25, 0.25 )
-polygon = PoolVector2Array( 24, -26, 25, 27, 23.5, 27, 22.1, 32, -22.8, 32, -24, 30.8, -24, -32, 24, -32 )
-
-[node name="Area2D" type="Area2D" parent="Enemies/Enemy1"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Enemy1/Area2D"]
-shape = SubResource( 30 )
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 105, 262 )
+constraint_left = Vector2( 105, 262 )
+constraint_right = Vector2( 187, 262 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
@@ -529,5 +518,3 @@ limit_top = 0
 limit_right = 479
 limit_bottom = 335
 script = ExtResource( 1 )
-
-[connection signal="body_entered" from="Enemies/Enemy1/Area2D" to="Enemies/Enemy1" method="_on_Area2D_body_entered"]

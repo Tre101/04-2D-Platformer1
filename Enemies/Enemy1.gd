@@ -4,13 +4,13 @@ var start_position = Vector2(450,300)
 var player = null
 var nav = null
 
-var speed = 125
+var speed = 1
 
 func _ready():
 	position = start_position
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if nav == null:
 		nav = get_node_or_null("/root/Game/Navigation2D")
 	elif player == null:
@@ -25,6 +25,10 @@ func _physics_process(delta):
 			if abs(s) < 1:
 				s = 0
 			var direction = target.normalized()
+			if direction.x < 0:
+				$Sprite.flip_h = true
+			else:
+				$Sprite.flip_h = false
 			var _v = move_and_slide(direction*s, Vector2.ZERO) 
 
 
