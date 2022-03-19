@@ -11,6 +11,21 @@
 [ext_resource path="res://Player/Player.gd" type="Script" id=9]
 [ext_resource path="res://StateMachine/WallJump.gd" type="Script" id=10]
 
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 224, 70, 32, 70 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 256, 70, 32, 70 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 288, 70, 32, 70 )
+
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
@@ -61,21 +76,6 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 288, 0, 32, 70 )
 
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 224, 70, 32, 70 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 256, 70, 32, 70 )
-
-[sub_resource type="AtlasTexture" id=13]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 288, 70, 32, 70 )
-
 [sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 1 )
@@ -83,6 +83,16 @@ region = Rect2( 256, 70, 32, 70 )
 
 [sub_resource type="SpriteFrames" id=15]
 animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "Attacking",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": false,
+"name": "Falling",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 1 ) ],
 "loop": true,
 "name": "Idle",
@@ -96,16 +106,6 @@ animations = [ {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": false,
 "name": "Jumping",
-"speed": 5.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "Attacking",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
-"loop": false,
-"name": "Falling",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 14 ) ],
@@ -150,6 +150,7 @@ color_ramp = SubResource( 18 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 200, 200 )
+scale = Vector2( 0.25, 0.25 )
 script = ExtResource( 9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -235,5 +236,6 @@ emitting = false
 explosiveness = 0.25
 randomness = 0.85
 process_material = SubResource( 21 )
+
 [connection signal="timeout" from="StateMachine/Coyote/Timer" to="StateMachine/Coyote" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateMachine/WallJump/Timer" to="StateMachine/WallJump" method="_on_Timer_timeout"]

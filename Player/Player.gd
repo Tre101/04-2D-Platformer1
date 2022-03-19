@@ -8,14 +8,14 @@ var direction = 1
 
 export var gravity = Vector2(0,30)
 
-export var move_speed = 20
-export var max_move = 300
+export var move_speed = 5
+export var max_move = 100
 
-export var jump_speed = 100
-export var max_jump = 1000
+export var jump_speed = 50
+export var max_jump = 400
 
-export var leap_speed = 100
-export var max_leap = 1000
+export var leap_speed = 75
+export var max_leap = 400
 
 var moving = false
 var is_jumping = false
